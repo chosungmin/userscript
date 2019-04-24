@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         localhostURLChanger
-// @version      0.2
+// @version      0.3
 // @description  Change localhost to local IP
 // @author       chosungmin
-// @match        http://localhost/**
+// @match        http://localhost/*
 // @grant        none
 // @updateURL    https://github.com/chosungmin/userscript/raw/master/localhostURLChanger.user.js
+// @downloadURL  https://github.com/chosungmin/userscript/raw/master/localhostURLChanger.user.js 
 // ==/UserScript==
 
 (function() {
