@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         localhostURLChanger
-// @version      0.3
+// @version      0.4
 // @description  Change localhost to local IP
 // @author       chosungmin
 // @match        http://localhost/*
@@ -72,11 +72,31 @@
     });
 
     findLocalIp().then(function(localIp) {
-        if (!localIp || !localIp[0]) {
+        if (!localIp || !localIp[0] || !checkIP(localIp[0])) {
             return;
         }
 
         let url = winLoc.href.replace(`${winLoc.protocol}//${winLoc.hostname}`, `${winLoc.protocol}//${localIp[0]}`);
         window.location.replace(url);
     });
+    
+    function checkIP(ip) {
+        var x = ip.split("."), x1, x2, x3, x4;
+
+        if (x.length == 4) {
+            x1 = parseInt(x[0], 10);
+            x2 = parseInt(x[1], 10);
+            x3 = parseInt(x[2], 10);
+            x4 = parseInt(x[3], 10);
+
+            if (isNaN(x1) || isNaN(x2) || isNaN(x3) || isNaN(x4)) {
+                return false;
+            }
+
+            if ((x1 >= 0 && x1 <= 255) && (x2 >= 0 && x2 <= 255) && (x3 >= 0 && x3 <= 255) && (x4 >= 0 && x4 <= 255)) {
+                return true;
+            }
+        }
+        return false;
+    }   
 })();
